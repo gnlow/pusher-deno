@@ -33,11 +33,11 @@ const validateSocketId = function (socketId) {
  * @param {Boolean} [options.useTLS=false] whether to use TLS
  * @param {Boolean} [options.encrypted=false] deprecated; renamed to `useTLS`
  * @param {Boolean} [options.notification_encrypted=false] whether to use TLS for notifications
- * @param {Integer} [options.port] port, default depends on the scheme
- * @param {Integer} options.appId application ID
+ * @param {Number} [options.port] port, default depends on the scheme
+ * @param {Number} options.appId application ID
  * @param {String} options.key application key
  * @param {String} options.secret application secret
- * @param {Integer} [options.timeout] request timeout in milliseconds
+ * @param {Number} [options.timeout] request timeout in milliseconds
  * @param {Agent} [options.agent] http agent to use
  */
 function Pusher(options) {

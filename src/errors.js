@@ -5,7 +5,7 @@
  * @param {String} message error message
  * @param {String} url request URL
  * @param [error] optional error cause
- * @param {Integer} [status] response status code, if received
+ * @param {Number} [status] response status code, if received
  * @param {String} [body] response body, if received
  */
 function RequestError(message, url, error, status, body) {
@@ -17,7 +17,7 @@ function RequestError(message, url, error, status, body) {
     this.url = url;
     /** @member optional error cause */
     this.error = error;
-    /** @member {Integer} response status code, if received */
+    /** @member {Number} response status code, if received */
     this.status = status;
     /** @member {String} response body, if received */
     this.body = body;
