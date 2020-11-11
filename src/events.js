@@ -1,7 +1,8 @@
 import * as util from "./util.js";
-import 
-nacl from "tweetnacl";
-import naclUtil from "tweetnacl-util";
+// @deno-types="https://unpkg.com/tweetnacl/nacl.d.ts"
+import nacl from "https://jspm.dev/tweetnacl";
+// @deno-types="https://unpkg.com/tweetnacl-util/nacl-util.d.ts"
+import naclUtil from "https://jspm.dev/tweetnacl-util"
 function encrypt(pusher, channel, data) {
     if (pusher.config.encryptionMasterKey === undefined) {
         throw new Error("Set encryptionMasterKey before triggering events on encrypted channels");
