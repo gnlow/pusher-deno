@@ -1,4 +1,4 @@
-import crypto from "crypto";
+import { createHash } from "https://deno.land/std@0.77.0/hash/mod.ts";
 function toOrderedArray(map) {
     return Object.keys(map)
         .map(function (key) {
@@ -18,7 +18,7 @@ function toOrderedArray(map) {
     });
 }
 function getMD5(body) {
-    return crypto.createHash("md5").update(body, "utf8").digest("hex");
+    return createHash("md5").update(body).toString("hex");
 }
 function secureCompare(a, b) {
     if (a.length !== b.length) {

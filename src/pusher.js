@@ -1,4 +1,4 @@
-import crypto from "crypto";
+import { createHash } from "https://deno.land/std@0.77.0/hash/mod.ts";
 import url from "url";
 import * as auth from "./auth.js";
 import * as errors from "./errors.js";
@@ -190,8 +190,7 @@ Pusher.prototype.createSignedQueryString = function (options) {
     return requests.createSignedQueryString(this.config.token, options);
 };
 Pusher.prototype.channelSharedSecret = function (channel) {
-    return crypto
-        .createHash("sha256")
+    return createHash("sha256")
         .update(channel + this.config.encryptionMasterKey)
         .digest();
 };

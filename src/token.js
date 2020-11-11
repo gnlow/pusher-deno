@@ -1,4 +1,4 @@
-import crypto from "crypto";
+import { hmac } from "https://denopkg.com/chiefbiiko/hmac/mod.ts";
 import * as util from "./util.js";
 /** Verifies and signs data against the key and secret.
  *
@@ -16,10 +16,7 @@ function Token(key, secret) {
  * @returns {String}
  */
 Token.prototype.sign = function (string) {
-    return crypto
-        .createHmac("sha256", this.secret)
-        .update(Buffer.from(string))
-        .digest("hex");
+    return hmac("sha256", this.secret, string, "utf8", "hex")
 };
 /** Checks if the string has correct signature.
  *
