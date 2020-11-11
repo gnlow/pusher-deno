@@ -1,4 +1,4 @@
-import Config from "./config.js";
+import Config from "./config.ts";
 
 class PusherConfig {
 	public host: any;

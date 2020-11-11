@@ -1,4 +1,4 @@
-import * as util from "./util.js";
+import * as util from "./util.ts";
 // @deno-types="https://unpkg.com/tweetnacl/nacl.d.ts"
 import nacl from "https://jspm.dev/tweetnacl";
 // @deno-types="https://unpkg.com/tweetnacl-util/nacl-util.d.ts"

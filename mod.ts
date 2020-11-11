@@ -1,1 +1,1 @@
-export { default } from "./src/pusher.js"
+export { default } from "./src/pusher.ts"

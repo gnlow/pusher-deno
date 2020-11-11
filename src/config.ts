@@ -1,4 +1,4 @@
-import Token from "./token.js";
+import Token from "./token.ts";
 const isBase64 = () => true
 
 class Config {
