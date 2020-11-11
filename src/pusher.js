@@ -1,5 +1,4 @@
 import { createHash } from "https://deno.land/std@0.77.0/hash/mod.ts";
-import url from "https://deno.land/std@0.77.0/node/url.ts";
 import * as auth from "./auth.js";
 import * as errors from "./errors.js";
 import * as events from "./events.js";
@@ -58,16 +57,15 @@ function Pusher(options) {
  * @returns {Pusher} instance configured for the URL and options
  */
 Pusher.forURL = function (pusherUrl, options) {
-    const apiUrl = url.parse(pusherUrl);
+    const apiUrl = new URL(pusherUrl);
     const apiPath = apiUrl.pathname.split("/");
-    const apiAuth = apiUrl.auth.split(":");
     return new Pusher(Object.assign({}, options || {}, {
         scheme: apiUrl.protocol.replace(/:$/, ""),
         host: apiUrl.hostname,
         port: parseInt(apiUrl.port, 10) || undefined,
         appId: parseInt(apiPath[apiPath.length - 1], 10),
-        key: apiAuth[0],
-        secret: apiAuth[1],
+        key: apiUrl.username,
+        secret: apiUrl.password,
     }));
 };
 /** Create a Pusher instance using a cluster name.
