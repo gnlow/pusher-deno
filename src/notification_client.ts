@@ -2,6 +2,8 @@ import * as requests from "./requests.js";
 import NotificationConfig from "./notification_config.js";
 
 class NotificationClient {
+	public config: any;
+
     constructor(options) {
         this.config = new NotificationConfig(options);
     }

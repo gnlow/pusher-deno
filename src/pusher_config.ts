@@ -1,6 +1,9 @@
 import Config from "./config.js";
 
 class PusherConfig {
+	public host: any;
+	public appId: any;
+
     constructor(options) {
         Config.call(this, options);
         if (options.host) {
