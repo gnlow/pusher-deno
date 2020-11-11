@@ -40,7 +40,7 @@ export const trigger = function (pusher, channels, eventName, data, socketId) {
         const event = {
             name: eventName,
             data: ensureJSON(data),
-            channels: channels,
+            channels,
         };
         if (socketId) {
             event.socket_id = socketId;
@@ -54,5 +54,5 @@ export const triggerBatch = function (pusher, batch) {
             ? encrypt(pusher, batch[i].channel, batch[i].data)
             : ensureJSON(batch[i].data);
     }
-    return pusher.post({ path: "/batch_events", body: { batch: batch } });
+    return pusher.post({ path: "/batch_events", body: { batch } });
 };

@@ -16,7 +16,7 @@ function send(config, options) {
         method,
         path,
         params: options.params,
-        body: body,
+        body,
     })}`;
     const headers = {
         "x-pusher-library": "pusher-http-node " + pusherLibraryVersion,
