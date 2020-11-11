@@ -1,6 +1,6 @@
-import * as errors from "./errors.ts";
-import * as util from "./util.ts";
-import pusherLibraryVersion from "./version.ts";
+import * as errors from "./errors.js";
+import * as util from "./util.js";
+import pusherLibraryVersion from "./version.js";
 const RESERVED_QUERY_KEYS = {
     auth_key: true,
     auth_timestamp: true,

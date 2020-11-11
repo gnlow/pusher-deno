@@ -1,5 +1,5 @@
 import { hmac } from "https://denopkg.com/chiefbiiko/hmac/mod.ts";
-import * as util from "./util.ts";
+import * as util from "./util.js";
 
 /** Verifies and signs data against the key and secret.
  *

@@ -1,4 +1,4 @@
-import * as errors from "./errors.ts";
+import * as errors from "./errors.js";
 
 /** Provides validation and access methods for a WebHook.
  *

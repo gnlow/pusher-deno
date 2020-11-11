@@ -1,4 +1,4 @@
-import Config from "./config.ts";
+import Config from "./config.js";
 const DEFAULT_HOST = "nativepush-cluster1.pusher.com";
 const API_PREFIX = "server_api";
 const API_VERSION = "v1";

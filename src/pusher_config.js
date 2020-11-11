@@ -1,4 +1,4 @@
-import Config from "./config.ts";
+import Config from "./config.js";
 
 class PusherConfig {
     constructor(options) {
