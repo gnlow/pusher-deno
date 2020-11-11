@@ -1,4 +1,4 @@
-import Config from "./config";
+import Config from "./config.js";
 function PusherConfig(options) {
     Config.call(this, options);
     if (options.host) {

@@ -1,8 +1,8 @@
 import fetch from "node-fetch";
 import AbortController from "abort-controller";
-import * as errors from "./errors";
-import * as util from "./util";
-import pusherLibraryVersion from "./version";
+import * as errors from "./errors.js";
+import * as util from "./util.js";
+import pusherLibraryVersion from "./version.js";
 const RESERVED_QUERY_KEYS = {
     auth_key: true,
     auth_timestamp: true,

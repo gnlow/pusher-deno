@@ -1,5 +1,5 @@
-import * as requests from "./requests";
-import NotificationConfig from "./notification_config";
+import * as requests from "./requests.js";
+import NotificationConfig from "./notification_config.js";
 function NotificationClient(options) {
     this.config = new NotificationConfig(options);
 }

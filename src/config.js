@@ -1,4 +1,4 @@
-import Token from "./token";
+import Token from "./token.js";
 const isBase64 = () => true
 function Config(options) {
     options = options || {};

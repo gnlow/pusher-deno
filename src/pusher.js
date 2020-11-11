@@ -1,13 +1,13 @@
 import crypto from "crypto";
 import url from "url";
-import * as auth from "./auth";
-import * as errors from "./errors";
-import * as events from "./events";
-import * as requests from "./requests";
-import PusherConfig from "./pusher_config";
-import Token from "./token";
-import WebHook from "./webhook";
-import NotificationClient from "./notification_client";
+import * as auth from "./auth.js";
+import * as errors from "./errors.js";
+import * as events from "./events.js";
+import * as requests from "./requests.js";
+import PusherConfig from "./pusher_config.js";
+import Token from "./token.js";
+import WebHook from "./webhook.js";
+import NotificationClient from "./notification_client.js";
 const validateChannel = function (channel) {
     if (typeof channel !== "string" ||
         channel === "" ||
