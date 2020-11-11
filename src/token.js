@@ -8,9 +8,6 @@ import * as util from "./util.ts";
  * @param {String} secret app secret
  */
 class Token {
-	public key: any;
-	public secret: any;
-
  constructor(key, secret) {
      this.key = key;
      this.secret = secret;

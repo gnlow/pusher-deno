@@ -2,15 +2,6 @@ import Token from "./token.ts";
 const isBase64 = () => true
 
 class Config {
-	public scheme: any;
-	public port: any;
-	public appId: any;
-	public token: any;
-	public timeout: any;
-	public agent: any;
-	public encryptionMasterKey: any;
-	public host: any;
-
     constructor(options) {
         options = options || {};
         let useTLS = false;

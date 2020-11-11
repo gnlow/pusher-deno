@@ -42,9 +42,6 @@ const validateSocketId = function (socketId) {
  * @param {Agent} [options.agent] http agent to use
  */
 class Pusher {
-	public config: any;
-	public notificationClient: any;
-
     constructor(options) {
         this.config = new PusherConfig(options);
         const notificationOptions = Object.assign({}, options, {

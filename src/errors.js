@@ -9,15 +9,7 @@
  * @param {String} [body] response body, if received
  */
 class RequestError extends Error {
-	public name: any;
-	public stack: any;
-	public message: any;
-	public url: any;
-	public error: any;
-	public status: any;
-	public body: any;
-
- constructor(message, url, error, status?, body?) {
+ constructor(message, url, error, status, body) {
      this.name = "PusherRequestError";
      this.stack = new Error().stack;
      /** @member {String} error message */
@@ -43,13 +35,6 @@ class RequestError extends Error {
  * @param {String} signature WebHook signature
  */
 class WebHookError extends Error {
-	public name: any;
-	public stack: any;
-	public message: any;
-	public contentType: any;
-	public body: any;
-	public signature: any;
-
  constructor(message, contentType, body, signature) {
      this.name = "PusherWebHookError";
      this.stack = new Error().stack;

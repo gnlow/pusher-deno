@@ -4,9 +4,6 @@ const API_PREFIX = "server_api";
 const API_VERSION = "v1";
 
 class NotificationConfig {
-	public host: any;
-	public appId: any;
-
     constructor(options) {
         Config.call(this, options);
         this.host = options.host || DEFAULT_HOST;
