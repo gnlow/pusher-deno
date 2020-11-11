@@ -1,5 +1,5 @@
 import { createHash } from "https://deno.land/std@0.77.0/hash/mod.ts";
-import url from "url";
+import url from "https://deno.land/std@0.77.0/node/url.ts";
 import * as auth from "./auth.js";
 import * as errors from "./errors.js";
 import * as events from "./events.js";
