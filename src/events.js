@@ -1,7 +1,7 @@
 import * as util from "./util.js";
 import 
-nacl from "./tweetnacl.js";
-import naclUtil from "./tweetnacl-util.js";
+nacl from "tweetnacl";
+import naclUtil from "tweetnacl-util";
 function encrypt(pusher, channel, data) {
     if (pusher.config.encryptionMasterKey === undefined) {
         throw new Error("Set encryptionMasterKey before triggering events on encrypted channels");
