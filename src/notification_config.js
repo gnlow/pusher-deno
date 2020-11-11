@@ -2,12 +2,17 @@ import Config from "./config.js";
 const DEFAULT_HOST = "nativepush-cluster1.pusher.com";
 const API_PREFIX = "server_api";
 const API_VERSION = "v1";
-function NotificationConfig(options) {
-    Config.call(this, options);
-    this.host = options.host || DEFAULT_HOST;
+
+class NotificationConfig {
+    constructor(options) {
+        Config.call(this, options);
+        this.host = options.host || DEFAULT_HOST;
+    }
+
+    prefixPath(subPath) {
+        return "/" + API_PREFIX + "/" + API_VERSION + "/apps/" + this.appId + subPath;
+    }
 }
+
 Object.assign(NotificationConfig.prototype, Config.prototype);
-NotificationConfig.prototype.prefixPath = function (subPath) {
-    return "/" + API_PREFIX + "/" + API_VERSION + "/apps/" + this.appId + subPath;
-};
 export default NotificationConfig;
