@@ -1,5 +1,3 @@
-import fetch from "node-fetch";
-import AbortController from "abort-controller";
 import * as errors from "./errors.js";
 import * as util from "./util.js";
 import pusherLibraryVersion from "./version.js";
