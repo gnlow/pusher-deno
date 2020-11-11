@@ -3,9 +3,9 @@ const DEFAULT_HOST = "nativepush-cluster1.pusher.com";
 const API_PREFIX = "server_api";
 const API_VERSION = "v1";
 
-class NotificationConfig {
+class NotificationConfig extends Config {
     constructor(options) {
-        Config.call(this, options);
+        super(options);
         this.host = options.host || DEFAULT_HOST;
     }
 

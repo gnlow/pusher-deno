@@ -1,8 +1,8 @@
 import Config from "./config.js";
 
-class PusherConfig {
+class PusherConfig extends Config {
     constructor(options) {
-        Config.call(this, options);
+        super(options);
         if (options.host) {
             this.host = options.host;
         }
