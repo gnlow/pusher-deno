@@ -1,4 +1,4 @@
-import * as errors from "./errors.js";
+import * as errors from "./errors.ts";
 
 /** Provides validation and access methods for a WebHook.
  *
@@ -12,6 +12,13 @@ import * as errors from "./errors.js";
  * @param {String} request.rawBody raw WebHook body
  */
 class WebHook {
+	public token: any;
+	public key: any;
+	public signature: any;
+	public contentType: any;
+	public body: any;
+	public data: any;
+
     constructor(token, request) {
         this.token = token;
         this.key = request.headers["x-pusher-key"];

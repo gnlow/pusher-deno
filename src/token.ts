@@ -1,5 +1,5 @@
 import { hmac } from "https://denopkg.com/chiefbiiko/hmac/mod.ts";
-import * as util from "./util.js";
+import * as util from "./util.ts";
 
 /** Verifies and signs data against the key and secret.
  *
@@ -8,6 +8,9 @@ import * as util from "./util.js";
  * @param {String} secret app secret
  */
 class Token {
+	public key: any;
+	public secret: any;
+
  constructor(key, secret) {
      this.key = key;
      this.secret = secret;

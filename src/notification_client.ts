@@ -1,7 +1,9 @@
-import * as requests from "./requests.js";
-import NotificationConfig from "./notification_config.js";
+import * as requests from "./requests.ts";
+import NotificationConfig from "./notification_config.ts";
 
 class NotificationClient {
+	public config: any;
+
     constructor(options) {
         this.config = new NotificationConfig(options);
     }

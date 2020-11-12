@@ -1,12 +1,12 @@
 import { createHash } from "https://deno.land/std@0.77.0/hash/mod.ts";
-import * as auth from "./auth.js";
-import * as errors from "./errors.js";
-import * as events from "./events.js";
-import * as requests from "./requests.js";
-import PusherConfig from "./pusher_config.js";
-import Token from "./token.js";
-import WebHook from "./webhook.js";
-import NotificationClient from "./notification_client.js";
+import * as auth from "./auth.ts";
+import * as errors from "./errors.ts";
+import * as events from "./events.ts";
+import * as requests from "./requests.ts";
+import PusherConfig from "./pusher_config.ts";
+import Token from "./token.ts";
+import WebHook from "./webhook.ts";
+import NotificationClient from "./notification_client.ts";
 const validateChannel = function (channel) {
     if (typeof channel !== "string" ||
         channel === "" ||
@@ -42,6 +42,9 @@ const validateSocketId = function (socketId) {
  * @param {Agent} [options.agent] http agent to use
  */
 class Pusher {
+	public config: any;
+	public notificationClient: any;
+
     constructor(options) {
         this.config = new PusherConfig(options);
         const notificationOptions = Object.assign({}, options, {

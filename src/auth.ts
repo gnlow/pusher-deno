@@ -1,4 +1,4 @@
-import * as util from "./util.js";
+import * as util from "./util.ts";
 function getSocketSignature(pusher, token, channel, socketID, data) {
     const result = {};
     const signatureData = [socketID, channel];
