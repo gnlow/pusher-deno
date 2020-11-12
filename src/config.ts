@@ -1,5 +1,7 @@
 import Token from "./token.ts";
-const isBase64 = (str: string) => /^([0-9a-zA-Z+/]{4})*(([0-9a-zA-Z+/]{2}==)|([0-9a-zA-Z+/]{3}=))?$/.test(str)
+function isBase64 (str: string) {
+    return /^([0-9a-zA-Z+/]{4})*(([0-9a-zA-Z+/]{2}==)|([0-9a-zA-Z+/]{3}=))?$/.test(str)
+}
 
 abstract class Config {
 	public scheme: any;
@@ -58,7 +60,7 @@ abstract class Config {
             if (!isBase64(options.encryptionMasterKeyBase64)) {
                 throw new Error("encryptionMasterKeyBase64 must be valid base64");
             }
-            const decodedKey = Buffer.from(options.encryptionMasterKeyBase64, "base64").toString("binary");
+            const decodedKey = atob(options.encryptionMasterKeyBase64);
             if (decodedKey.length !== 32) {
                 throw new Error("encryptionMasterKeyBase64 must decode to 32 bytes, but the string " +
                     options.encryptionMasterKeyBase64 +
