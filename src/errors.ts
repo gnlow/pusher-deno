@@ -52,6 +52,7 @@ class WebHookError extends Error {
 	public signature: any;
 
  constructor(message, contentType, body, signature) {
+     super()
      this.name = "PusherWebHookError";
      this.stack = new Error().stack;
      /** @member {String} error message */
