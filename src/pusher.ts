@@ -1,3 +1,5 @@
+import type PusherT from "./types.ts"
+
 import { createHash } from "https://deno.land/std@0.77.0/hash/mod.ts";
 import * as auth from "./auth.ts";
 import * as errors from "./errors.ts";
@@ -28,24 +30,30 @@ const validateSocketId = function (socketId) {
 /** Provides access to Pusher's REST API, WebHooks and authentication.
  *
  * @constructor
- * @param {Object} options
- * @param {String} [options.host="api.pusherapp.com"] API hostname
- * @param {String} [options.notification_host="api.pusherapp.com"] Notification API hostname
- * @param {Boolean} [options.useTLS=false] whether to use TLS
- * @param {Boolean} [options.encrypted=false] deprecated; renamed to `useTLS`
- * @param {Boolean} [options.notification_encrypted=false] whether to use TLS for notifications
- * @param {Number} [options.port] port, default depends on the scheme
- * @param {Number} options.appId application ID
- * @param {String} options.key application key
- * @param {String} options.secret application secret
- * @param {Number} [options.timeout] request timeout in milliseconds
- * @param {Agent} [options.agent] http agent to use
+ * @param options
+ * @param [options.host="api.pusherapp.com"] API hostname
+ * @param [options.notification_host="api.pusherapp.com"] Notification API hostname
+ * @param [options.useTLS=false] whether to use TLS
+ * @param [options.encrypted=false] deprecated; renamed to `useTLS`
+ * @param [options.notification_encrypted=false] whether to use TLS for notifications
+ * @param [options.port] port, default depends on the scheme
+ * @param options.appId application ID
+ * @param options.key application key
+ * @param options.secret application secret
+ * @param [options.timeout] request timeout in milliseconds
+ * @param [options.agent] http agent to use
  */
 class Pusher {
 	public config: any;
-	public notificationClient: any;
+    public notificationClient: any;
+    /** Exported {@link Token} constructor. */
+    static Token = Token;
+    /** Exported {@link RequestError} constructor. */
+    static RequestError = errors.RequestError;
+    /** Exported {@link WebHookError} constructor. */
+    static WebHookError = errors.WebHookError;
 
-    constructor(options) {
+    constructor(options: PusherT.Options) {
         this.config = new PusherConfig(options);
         const notificationOptions = Object.assign({}, options, {
             host: options.notificationHost,
@@ -58,9 +66,9 @@ class Pusher {
      *
      * URL should be in SCHEME://APP_KEY:SECRET_KEY@HOST:PORT/apps/APP_ID form.
      *
-     * @param {String} pusherUrl URL containing endpoint and app details
-     * @param {Object} [options] options, see the {@link Pusher} for details
-     * @returns {Pusher} instance configured for the URL and options
+     * @param pusherUrl URL containing endpoint and app details
+     * @param for details
+     * @returns instance configured for the URL and options
      */
     static forURL(pusherUrl, options) {
         const apiUrl = new URL(pusherUrl);
@@ -77,9 +85,9 @@ class Pusher {
 
     /** Create a Pusher instance using a cluster name.
      *
-     * @param {String} cluster cluster name
-     * @param {Object} [options] options, see the {@link Pusher} for details
-     * @returns {Pusher} instance configured for the cluster and options
+     * @param cluster cluster name
+     * @param for details
+     * @returns instance configured for the cluster and options
      */
     static forCluster(cluster, options) {
         return new Pusher(Object.assign({}, options || {}, {
@@ -89,12 +97,16 @@ class Pusher {
 
     /** Returns a signature for given socket id, channel and socket data.
      *
-     * @param {String} socketId socket id
-     * @param {String} channel channel name
-     * @param {Object} [data] additional socket data
-     * @returns {String} authentication signature
+     * @param socketId socket id
+     * @param channel channel name
+     * @param [data] additional socket data
+     * @returns authentication signature
      */
-    authenticate(socketId, channel, data) {
+    authenticate(
+        socketId: string,
+        channel: string,
+        data?: PusherT.PresenceChannelData
+    ): PusherT.AuthResponse {
         validateSocketId(socketId);
         validateChannel(channel);
         return auth.getSocketSignature(this, this.config.token, channel, socketId, data);
@@ -109,13 +121,18 @@ class Pusher {
      *
      * Returns a promise resolving to a response, or rejecting to a RequestError.
      *
-     * @param {String|String[]} channel list of at most 100 channels
-     * @param {String} event event name
+     * @param channel list of at most 100 channels
+     * @param event event name
      * @param data event data, objects are JSON-encoded
-     * @param {String} [socketId] id of a socket that should not receive the event
+     * @param [socketId] id of a socket that should not receive the event
      * @see RequestError
      */
-    trigger(channels, event, data, socketId) {
+    trigger(
+        channels: string | Array<string>,
+        event: string,
+        data: any,
+        socketId?: string
+    ): Promise<Response> {
         if (socketId) {
             validateSocketId(socketId);
         }
@@ -137,14 +154,14 @@ class Pusher {
 
     /* Triggers a batch of events
      *
-     * @param {Event[]} An array of events, where Event is
+     * @param An array of events, where Event is
      * {
      *   name: string,
      *   channel: string,
      *   data: any JSON-encodable data
      * }
      */
-    triggerBatch(batch) {
+    triggerBatch(batch: Array<Pusher.BatchEvent>): Promise<Response> {
         return events.triggerBatch(this, batch);
     }
 
@@ -156,13 +173,13 @@ class Pusher {
      *
      * Returns a promise resolving to a response, or rejecting to a RequestError.
      *
-     * @param {Object} options
-     * @param {String} options.path request path
-     * @param {Object} options.params query params
-     * @param {String} options.body request body
+     * @param options
+     * @param options.path request path
+     * @param options.params query params
+     * @param options.body request body
      * @see RequestError
      */
-    post(options) {
+    post(options: PusherT.PostOptions): Promise<Response> {
         return requests.send(this.config, Object.assign({}, options, { method: "POST" }));
     }
 
@@ -170,36 +187,36 @@ class Pusher {
      *
      * Returns a promise resolving to a response, or rejecting to a RequestError.
      *
-     * @param {Object} options
-     * @param {String} options.path request path
-     * @param {Object} options.params query params
+     * @param options
+     * @param options.path request path
+     * @param options.params query params
      * @see RequestError
      */
-    get(options) {
+    get(options: PusherT.GetOptions): Promise<Response> {
         return requests.send(this.config, Object.assign({}, options, { method: "GET" }));
     }
 
     /** Creates a WebHook object for a given request.
      *
-     * @param {Object} request
-     * @param {Object} request.headers WebHook HTTP headers with lower-case keys
-     * @param {String} request.rawBody raw WebHook body
-     * @returns {WebHook}
+     * @param request
+     * @param request.headers WebHook HTTP headers with lower-case keys
+     * @param request.rawBody raw WebHook body
+     * @returns
      */
-    webhook(request) {
+    webhook(request: PusherT.WebHookRequest): PusherT.WebHook {
         return new WebHook(this.config.token, request);
     }
 
     /** Builds a signed query string that can be used in a request to Pusher.
      *
-     * @param {Object} options
-     * @param {String} options.method request method
-     * @param {String} options.path request path
-     * @param {Object} options.params query params
-     * @param {String} options.body request body
-     * @returns {String} signed query string
+     * @param options
+     * @param options.method request method
+     * @param options.path request path
+     * @param options.params query params
+     * @param options.body request body
+     * @returns signed query string
      */
-    createSignedQueryString(options) {
+    createSignedQueryString(options: PusherT.SignedQueryStringOptions): string {
         return requests.createSignedQueryString(this.config.token, options);
     }
 
@@ -209,11 +226,5 @@ class Pusher {
             .digest();
     }
 }
-
-/** Exported {@link Token} constructor. */
-Pusher.Token = Token;
-/** Exported {@link RequestError} constructor. */
-Pusher.RequestError = errors.RequestError;
-/** Exported {@link WebHookError} constructor. */
-Pusher.WebHookError = errors.WebHookError;
 export default Pusher;
+
