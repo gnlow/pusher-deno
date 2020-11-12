@@ -56,7 +56,7 @@ function createSignedQueryString(token, request) {
         auth_key: token.key,
         auth_timestamp: timestamp,
         auth_version: "1.0",
-    };
+    } as any;
     if (request.body) {
         params.body_md5 = util.getMD5(request.body);
     }

@@ -24,7 +24,7 @@ export const trigger = function (pusher, channels, eventName, data, socketId) {
             name: eventName,
             data: encrypt(pusher, channel, data),
             channels: [channel],
-        };
+        } as any;
         if (socketId) {
             event.socket_id = socketId;
         }
@@ -41,7 +41,8 @@ export const trigger = function (pusher, channels, eventName, data, socketId) {
             name: eventName,
             data: ensureJSON(data),
             channels,
-        };
+            socketId,
+        } as any;
         if (socketId) {
             event.socket_id = socketId;
         }
