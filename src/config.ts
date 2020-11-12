@@ -9,7 +9,7 @@ abstract class Config {
 	public appId: any;
 	public token: any;
 	public timeout: any;
-	public agent: any;
+	// public agent: any;
 	public encryptionMasterKey: any;
 	public host: any;
 
@@ -32,7 +32,7 @@ abstract class Config {
         this.appId = options.appId;
         this.token = new Token(options.key, options.secret);
         this.timeout = options.timeout;
-        this.agent = options.agent;
+        // this.agent = options.agent;
         // Handle deprecated raw 32 byte string as key
         if (options.encryptionMasterKey !== undefined) {
             if (options.encryptionMasterKeyBase64 !== undefined) {

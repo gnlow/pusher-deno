@@ -41,7 +41,6 @@ const validateSocketId = function (socketId) {
  * @param options.key application key
  * @param options.secret application secret
  * @param [options.timeout] request timeout in milliseconds
- * @param [options.agent] http agent to use
  */
 class Pusher {
 	public config: any;

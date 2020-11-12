@@ -2,8 +2,6 @@
     Original: https://github.com/pusher/pusher-http-node/blob/master/index.d.ts
 */
 
-type Agent = any // Must be fixed
-
 export namespace PusherT {
     export interface BaseOptions {
       appId: string
@@ -12,7 +10,7 @@ export namespace PusherT {
       useTLS?: boolean
       encrypted?: boolean
       timeout?: number
-      agent?: Agent
+      // agent?: Agent
       encryptionMasterKeyBase64?: string
 
       notificationHost?: string
