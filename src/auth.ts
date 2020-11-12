@@ -1,6 +1,6 @@
 import * as util from "./util.ts";
 function getSocketSignature(pusher, token, channel, socketID, data) {
-    const result = {};
+    const result = {} as any;
     const signatureData = [socketID, channel];
     if (data) {
         const serializedData = JSON.stringify(data);
@@ -12,7 +12,7 @@ function getSocketSignature(pusher, token, channel, socketID, data) {
         if (pusher.config.encryptionMasterKey === undefined) {
             throw new Error("Cannot generate shared_secret because encryptionMasterKey is not set");
         }
-        result.shared_secret = Buffer.from(pusher.channelSharedSecret(channel)).toString("base64");
+        result.shared_secret = btoa(pusher.channelSharedSecret(channel));
     }
     return result;
 }
