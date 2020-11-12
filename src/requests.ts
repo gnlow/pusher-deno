@@ -36,7 +36,7 @@ function send(config, options) {
         body,
         headers,
         signal,
-        agent: config.agent,
+        // agent: config.agent,
     }).then((res) => {
         clearTimeout(timeout);
         if (res.status >= 400) {
