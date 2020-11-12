@@ -1,7 +1,7 @@
 import Token from "./token.ts";
 const isBase64 = () => true
 
-class Config {
+abstract class Config {
 	public scheme: any;
 	public port: any;
 	public appId: any;
@@ -70,9 +70,7 @@ class Config {
         }
     }
 
-    prefixPath() {
-        throw "NotImplementedError: #prefixPath should be implemented by subclasses";
-    }
+    abstract prefixPath(subPath: string): string
 
     getBaseURL() {
         const port = this.port ? ":" + this.port : "";
