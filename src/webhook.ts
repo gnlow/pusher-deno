@@ -1,3 +1,5 @@
+import type { PusherT } from "./types.ts"
+
 import * as errors from "./errors.ts";
 
 /** Provides validation and access methods for a WebHook.
@@ -6,10 +8,10 @@ import * as errors from "./errors.ts";
  * will be raised from access methods.
  *
  * @constructor
- * @param {Token} primary token
- * @param {Object} request
- * @param {Object} request.headers WebHook HTTP headers with lower-case keys
- * @param {String} request.rawBody raw WebHook body
+ * @param primary token
+ * @param request
+ * @param request.headers WebHook HTTP headers with lower-case keys
+ * @param request.rawBody raw WebHook body
  */
 class WebHook {
 	public token: any;
@@ -19,7 +21,7 @@ class WebHook {
 	public body: any;
 	public data: any;
 
-    constructor(token, request) {
+    constructor(token: PusherT.Token, request: PusherT.WebHookRequest) {
         this.token = token;
         this.key = request.headers["x-pusher-key"];
         this.signature = request.headers["x-pusher-signature"];
@@ -38,10 +40,9 @@ class WebHook {
 
     /** Checks whether the WebHook has valid body and signature.
      *
-     * @param {Token|Token[]} list of additional tokens to be validated against
-     * @returns {Boolean}
+     * @param list of additional tokens to be validated against
      */
-    isValid(extraTokens) {
+    isValid(extraTokens?: PusherT.Token | Array<PusherT.Token>): boolean {
         if (!this.isBodyValid()) {
             return false;
         }
@@ -62,27 +63,24 @@ class WebHook {
     /** Checks whether the WebHook content type is valid.
      *
      * For now, the only valid WebHooks have content type of application/json.
-     *
-     * @returns {Boolean}
      */
-    isContentTypeValid() {
+    isContentTypeValid(): boolean {
         return this.contentType === "application/json";
     }
 
     /** Checks whether the WebHook content type and body is JSON.
      *
-     * @returns {Boolean}
+     * @returns
      */
-    isBodyValid() {
+    isBodyValid(): boolean {
         return this.data !== undefined;
     }
 
     /** Returns all WebHook data.
      *
      * @throws WebHookError when WebHook is invalid
-     * @returns {Object}
      */
-    getData() {
+    getData(): PusherT.WebHookData {
         if (!this.isBodyValid()) {
             throw new errors.WebHookError("Invalid WebHook body", this.contentType, this.body, this.signature);
         }
@@ -92,18 +90,16 @@ class WebHook {
     /** Returns WebHook events array.
      *
      * @throws WebHookError when WebHook is invalid
-     * @returns {Object[]}
      */
-    getEvents() {
+    getEvents(): Array<PusherT.Event> {
         return this.getData().events;
     }
 
     /** Returns WebHook timestamp.
      *
      * @throws WebHookError when WebHook is invalid
-     * @returns {Date}
      */
-    getTime() {
+    getTime(): Date {
         return new Date(this.getData().time_ms);
     }
 }

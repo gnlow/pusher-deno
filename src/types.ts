@@ -84,7 +84,7 @@ export namespace PusherT {
       rawBody: string
     }
   
-    interface Event {
+    export interface Event {
       name: string
       channel: string
       event: string
@@ -92,7 +92,7 @@ export namespace PusherT {
       socket_id: string
     }
   
-    interface WebHookData {
+    export interface WebHookData {
       time_ms: number
       events: Array<Event>
     }
@@ -100,16 +100,5 @@ export namespace PusherT {
     export interface Token {
       key: string
       secret: string
-    }
-  
-    export class WebHook {
-      constructor(token: Token, request: WebHookRequest)
-  
-      isValid(extraTokens?: Token | Array<Token>): boolean
-      isContentTypeValid(): boolean
-      isBodyValid(): boolean
-      getData(): WebHookData
-      getEvents(): Array<Event>
-      getTime(): Date
     }
 }

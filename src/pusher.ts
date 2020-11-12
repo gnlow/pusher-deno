@@ -203,7 +203,7 @@ class Pusher {
      * @param request.rawBody raw WebHook body
      * @returns
      */
-    webhook(request: PusherT.WebHookRequest): PusherT.WebHook {
+    webhook(request: PusherT.WebHookRequest): WebHook {
         return new WebHook(this.config.token, request);
     }
 
