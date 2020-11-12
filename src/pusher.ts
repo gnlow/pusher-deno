@@ -162,7 +162,7 @@ class Pusher {
      *   data: any JSON-encodable data
      * }
      */
-    triggerBatch(batch: Array<Pusher.BatchEvent>): Promise<Response> {
+    triggerBatch(batch: Array<PusherT.BatchEvent>): Promise<Response> {
         return events.triggerBatch(this, batch);
     }
 
