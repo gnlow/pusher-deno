@@ -5,12 +5,6 @@
 type Agent = any // Must be fixed
 
 export namespace PusherT {
-    export function forCluster(cluster: string, opts: BaseOptions): Pusher
-    export function forURL(
-      connectionString: string,
-      opts?: Partial<Options>
-    ): Pusher
-  
     export interface BaseOptions {
       appId: string
       key: string
@@ -20,13 +14,16 @@ export namespace PusherT {
       timeout?: number
       agent?: Agent
       encryptionMasterKeyBase64?: string
+
+      notificationHost?: string
+      notificationEncrypted?: boolean
     }
     interface ClusterOptions extends BaseOptions {
       cluster: string
     }
     interface HostOptions extends BaseOptions {
       host: string
-      port?: string
+      port?: number
     }
   
     export type Options = ClusterOptions | HostOptions

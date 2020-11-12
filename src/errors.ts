@@ -18,6 +18,7 @@ class RequestError extends Error {
 	public body: any;
 
  constructor(message, url, error, status?, body?) {
+     super()
      this.name = "PusherRequestError";
      this.stack = new Error().stack;
      /** @member {String} error message */

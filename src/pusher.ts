@@ -9,7 +9,6 @@ import PusherConfig from "./pusher_config.ts";
 import Token from "./token.ts";
 import WebHook from "./webhook.ts";
 import NotificationClient from "./notification_client.ts";
-import { BaseOptions } from ".."
 const validateChannel = function (channel) {
     if (typeof channel !== "string" ||
         channel === "" ||
@@ -90,7 +89,7 @@ class Pusher {
      * @param for details
      * @returns instance configured for the cluster and options
      */
-    static forCluster(cluster: string, options: BaseOptions): Pusher {
+    static forCluster(cluster: string, options: PusherT.BaseOptions): Pusher {
         return new Pusher(Object.assign({}, options || {}, {
             host: "api-" + cluster + ".pusher.com",
         }));
