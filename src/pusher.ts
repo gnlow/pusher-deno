@@ -1,4 +1,4 @@
-import type PusherT from "./types.ts"
+import type { PusherT } from "./types.ts"
 
 import { createHash } from "https://deno.land/std@0.77.0/hash/mod.ts";
 import * as auth from "./auth.ts";
@@ -9,6 +9,7 @@ import PusherConfig from "./pusher_config.ts";
 import Token from "./token.ts";
 import WebHook from "./webhook.ts";
 import NotificationClient from "./notification_client.ts";
+import { BaseOptions } from ".."
 const validateChannel = function (channel) {
     if (typeof channel !== "string" ||
         channel === "" ||
@@ -70,7 +71,7 @@ class Pusher {
      * @param for details
      * @returns instance configured for the URL and options
      */
-    static forURL(pusherUrl, options) {
+    static forURL(pusherUrl: string, options?: Partial<PusherT.Options>) {
         const apiUrl = new URL(pusherUrl);
         const apiPath = apiUrl.pathname.split("/");
         return new Pusher(Object.assign({}, options || {}, {
@@ -89,7 +90,7 @@ class Pusher {
      * @param for details
      * @returns instance configured for the cluster and options
      */
-    static forCluster(cluster, options) {
+    static forCluster(cluster: string, options: BaseOptions): Pusher {
         return new Pusher(Object.assign({}, options || {}, {
             host: "api-" + cluster + ".pusher.com",
         }));

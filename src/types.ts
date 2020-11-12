@@ -1,4 +1,10 @@
-export namespace Pusher {
+/*
+    Original: https://github.com/pusher/pusher-http-node/blob/master/index.d.ts
+*/
+
+type Agent = any // Must be fixed
+
+export namespace PusherT {
     export function forCluster(cluster: string, opts: BaseOptions): Pusher
     export function forURL(
       connectionString: string,
